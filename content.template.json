@@ -1,0 +1,28 @@
+{
+  "galleryItems": [
+    {
+      "id": "scriptTexture",
+      "title": "Script Texture",
+      "image": "https://meladmedia.michaelkumsa.com/images/script-texture.jpg"
+    },
+    {
+      "id": "historicNotes",
+      "title": "Historic Notes",
+      "image": "https://meladmedia.michaelkumsa.com/images/historic-notes.jpg"
+    }
+  ],
+  "onlineVideos": [
+    {
+      "id": "v1",
+      "title": "Parchment Heritage Overview",
+      "url": "https://meladmedia.michaelkumsa.com/videos/heritage-overview.mp4",
+      "poster": "https://meladmedia.michaelkumsa.com/images/heritage-overview-poster.jpg"
+    },
+    {
+      "id": "v2",
+      "title": "Cultural Archive Documentary",
+      "url": "https://meladmedia.michaelkumsa.com/videos/cultural-archive.mp4",
+      "poster": "https://meladmedia.michaelkumsa.com/images/cultural-archive-poster.jpg"
+    }
+  ]
+}

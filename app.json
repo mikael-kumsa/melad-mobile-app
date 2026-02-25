@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Melad",
+    "slug": "melad",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./src/img/splash-logo.png",
+    "splash": {
+      "image": "./src/img/splash-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F6ECD7"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.melad.app",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.melad.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./src/img/splash-logo.png",
+        "backgroundColor": "#F6ECD7"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1e9c6779-2217-4aa1-ac38-48f1e65692c4"
+      }
+    }
+  }
+}
