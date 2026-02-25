@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Animated, Image, Linking, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ResizeMode, Video } from "expo-av";
 import { managerProfile, socialLinks } from "../content";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { useAppTheme } from "../theme/ThemeProvider";
@@ -43,17 +44,27 @@ export default function AboutScreen() {
             </View>
           ))}
 
-          <View style={styles.managerCard}>
-            <Text style={styles.managerHeader}>{t("about.managerHeader")}</Text>
-            <View style={styles.managerTopRow}>
-              <Image source={managerProfile.image} style={styles.managerImage} />
-              <View style={styles.managerMeta}>
-                <Text style={styles.managerName}>{t("about.managerName")}</Text>
-                <Text style={styles.managerTitle}>{t("about.managerTitle")}</Text>
-              </View>
-            </View>
-            <Text style={styles.managerBody}>{t("about.managerBody")}</Text>
-          </View>
+	          <View style={styles.managerCard}>
+	            <Text style={styles.managerHeader}>{t("about.managerHeader")}</Text>
+	            <View style={styles.managerTopRow}>
+	              <Image source={managerProfile.image} style={styles.managerImage} />
+	              <View style={styles.managerMeta}>
+	                <Text style={styles.managerName}>{t("about.managerName")}</Text>
+	                <Text style={styles.managerTitle}>{t("about.managerTitle")}</Text>
+	              </View>
+	            </View>
+	            {managerProfile.videoSource ? (
+	              <Video
+	                source={managerProfile.videoSource}
+	                style={styles.managerVideo}
+	                useNativeControls
+	                shouldPlay={false}
+	                isLooping={false}
+	                resizeMode={ResizeMode.COVER}
+	              />
+	            ) : null}
+	            <Text style={styles.managerBody}>{t("about.managerBody")}</Text>
+	          </View>
 
           <View style={styles.socialCard}>
             <Text style={styles.socialHeader}>Follow Melad</Text>
@@ -184,6 +195,16 @@ const createStyles = (palette, isDark) =>
     color: palette.inkSoft,
     fontSize: 15,
     lineHeight: 23,
+  },
+  managerVideo: {
+    width: "100%",
+    height: 200,
+    borderRadius: 14,
+    backgroundColor: "#000",
+    marginBottom: 12,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: isDark ? "#5B4634" : "#E6CFA9",
   },
   socialCard: {
     marginTop: 10,

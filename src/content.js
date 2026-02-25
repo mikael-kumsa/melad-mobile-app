@@ -1,5 +1,6 @@
 export const managerProfile = {
   image: require("./img/aba-kidane-mariam.jpg"),
+  videoSource: require("./media/video/Message.mp4"),
 };
 
 export const serviceItems = [
@@ -21,7 +22,7 @@ export const galleryItems = [
   { id: "Image 10", image: require("./img/photo_1_2026-02-20_20-43-11.jpg") },
   { id: "Image 11", image: require("./img/photo_2_2026-02-20_20-43-03.jpg") },
   { id: "Image 12", image: require("./img/photo_2_2026-02-20_20-43-11.jpg") },
-  { id: "Image 13", image: require("./img/photo_3_2026-02-20_20-43-03.jpg") },
+  // { id: "Image 13", image: require("./img/photo_3_2026-02-20_20-43-03.jpg") },
   { id: "Image 14", image: require("./img/photo_3_2026-02-20_20-43-11.jpg") },
   { id: "Image 15", image: require("./img/photo_4_2026-02-20_20-43-03.jpg") },
   { id: "Image 16", image: require("./img/photo_4_2026-02-20_20-43-11.jpg") },

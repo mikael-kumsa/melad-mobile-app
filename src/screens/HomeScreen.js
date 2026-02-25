@@ -16,7 +16,8 @@ export default function HomeScreen() {
 
   const highlights = t("home.highlights", []);
   const insights = t("home.insights", []);
-  const timeline = t("home.timeline", []);
+  const timeline = t("home.timeline", "");
+  const timelineText = Array.isArray(timeline) ? timeline.join(" ") : timeline || "";
 
   const heroFade = useRef(new Animated.Value(0)).current;
   const heroRise = useRef(new Animated.Value(22)).current;
@@ -53,6 +54,19 @@ export default function HomeScreen() {
     setInsightIndex(0);
   }, [language]);
 
+  const getHighlightBullets = (item) => {
+    if (Array.isArray(item?.points)) {
+      return item.points.filter(Boolean);
+    }
+    if (typeof item?.text === "string") {
+      return item.text
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+    }
+    return [];
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.backgroundShapeTop} />
@@ -69,7 +83,7 @@ export default function HomeScreen() {
           ]}
         >
           <ImageBackground
-            source={{ uri: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80" }}
+            source={require("../img/hero.jpg")}
             style={styles.heroImage}
             imageStyle={styles.heroImageInner}
           >
@@ -91,7 +105,12 @@ export default function HomeScreen() {
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.highlightTitle}>{item.title}</Text>
-                <Text style={styles.highlightText}>{item.text}</Text>
+                {getHighlightBullets(item).map((point, pointIndex) => (
+                  <View key={`${item.title}_${pointIndex}`} style={styles.bulletRow}>
+                    <Text style={styles.bulletDot}>{"\u2022"}</Text>
+                    <Text style={styles.bulletText}>{point}</Text>
+                  </View>
+                ))}
               </View>
             </View>
           ))}
@@ -105,14 +124,8 @@ export default function HomeScreen() {
          
 
           <Text style={styles.sectionTitle}>{t("home.timelineTitle")}</Text>
-          <View style={styles.timelineWrap}>
-            {timeline.map((step, index) => (
-              <View key={step} style={styles.timelineItem}>
-                <View style={styles.dot} />
-                <Text style={styles.timelineText}>{step}</Text>
-                {index < timeline.length - 1 ? <View style={styles.line} /> : null}
-              </View>
-            ))}
+          <View style={styles.timelineTextCard}>
+            <Text style={styles.timelineParagraph}>{timelineText}</Text>
           </View>
         </Animated.View>
       </ScrollView>
@@ -232,7 +245,20 @@ const createStyles = (palette, isDark) =>
     fontWeight: "700",
     marginBottom: 3,
   },
-  highlightText: {
+  bulletRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginTop: 3,
+  },
+  bulletDot: {
+    color: palette.accentMuted,
+    fontSize: 14,
+    lineHeight: 21,
+    marginRight: 7,
+    marginTop: 0,
+  },
+  bulletText: {
+    flex: 1,
     color: palette.inkSoft,
     fontSize: 14,
     lineHeight: 21,
@@ -280,40 +306,17 @@ const createStyles = (palette, isDark) =>
     fontSize: 14,
     fontWeight: "700",
   },
-  timelineWrap: {
+  timelineTextCard: {
     backgroundColor: palette.surface,
     borderRadius: 16,
     borderWidth: 1,
     borderColor: isDark ? "#4C3C2D" : "#E8D5B3",
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    paddingVertical: 13,
+    paddingHorizontal: 14,
   },
-  timelineItem: {
-    flex: 1,
-    alignItems: "center",
-    position: "relative",
-  },
-  dot: {
-    width: 9,
-    height: 9,
-    borderRadius: 5,
-    backgroundColor: palette.accent,
-    marginBottom: 5,
-  },
-  line: {
-    position: "absolute",
-    top: 4,
-    right: -50,
-    width: "100%",
-    height: 1,
-    backgroundColor: isDark ? "#5A4633" : "#DCC8A2",
-  },
-  timelineText: {
+  timelineParagraph: {
     color: palette.inkSoft,
-    fontSize: 12,
-    fontWeight: "600",
+    fontSize: 14,
+    lineHeight: 22,
   },
   });
